@@ -1,0 +1,15 @@
+/target/
+*.mmdb
+*.part
+__pycache__/
+
+/dist/
+/packaging/omarchy/src/
+/packaging/omarchy/pkg/
+/packaging/omarchy/*.tar.*
+/packaging/omarchy/*.pkg.tar.*
+/Test note.txt
+/GRAPHICAL-PROGRESS.md
+/global-network-map.png
+/preview.png
+/preview.svg

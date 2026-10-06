@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Name=Global Network Map
+Comment=Live local network traffic on a world map
+Exec=global-network-map-gui
+Icon=global-network-map
+Terminal=false
+Categories=Network;Monitor;
+Keywords=network;traffic;map;bandwidth;
+StartupNotify=true
+StartupWMClass=global-network-map
+Actions=Demo;
+
+[Desktop Action Demo]
+Name=Preview with demo traffic
+Exec=global-network-map-gui --demo

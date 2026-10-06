@@ -1,0 +1,44 @@
+[package]
+name = "global-network-map"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "An Omarchy-aware graphical and terminal map of this computer's network traffic"
+default-run = "global-network-map"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+crossterm = "0.28"
+libc = "0.2"
+maxminddb = "0.32"
+pcap = "2"
+ratatui = "0.29"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+signal-hook = "0.3"
+toml = "0.8"
+eframe = { version = "0.33", optional = true, default-features = false, features = ["default_fonts", "glow", "wayland", "x11"] }
+earcutr = { version = "0.4", optional = true }
+image = { version = "0.25", optional = true, default-features = false, features = ["png"] }
+
+[features]
+default = []
+gui = ["dep:eframe", "dep:earcutr", "dep:image"]
+
+[profile.release]
+lto = "thin"
+strip = true
+
+[[bin]]
+name = "global-network-map"
+path = "src/main.rs"
+
+[[bin]]
+name = "global-network-map-capture"
+path = "src/bin/capture.rs"
+
+[[bin]]
+name = "global-network-map-gui"
+path = "src/bin/gui.rs"
+required-features = ["gui"]

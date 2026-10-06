@@ -1,0 +1,29 @@
+# Maintainer: Vandrare <https://github.com/vandrare>
+pkgname=global-network-map
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Omarchy-aware world map of local network traffic with graphical and terminal interfaces"
+arch=('x86_64')
+url='https://github.com/vandrare/global-network-map'
+license=('MIT')
+depends=('glibc' 'gcc-libs' 'libpcap' 'libxkbcommon' 'libglvnd' 'wayland'
+         'libx11' 'libxcursor' 'libxi' 'libxrandr' 'polkit' 'sudo' 'iproute2'
+         'curl' 'hicolor-icon-theme')
+optdepends=('omarchy: live desktop theme colors')
+options=('!strip' '!debug')
+source=("${pkgname}-${pkgver}-linux-x86_64.tar.gz::${url}/releases/download/v${pkgver}/${pkgname}-${pkgver}-linux-x86_64.tar.gz"
+        'global-network-map.desktop')
+sha256sums=('7c9fcacf349ef36e881cf96d5ecf6c49a0525cde44f6b4139ffdaca4fd609c25'
+            '4b78992efeaa945c76501c187b8feebcde08eba4de4b703eb0ffb2e06cdbe811')
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}-linux-x86_64"
+  for binary in global-network-map global-network-map-gui global-network-map-capture; do
+    install -Dm755 "bin/$binary" "${pkgdir}/usr/bin/$binary"
+  done
+  install -Dm644 "${srcdir}/global-network-map.desktop" "${pkgdir}/usr/share/applications/global-network-map.desktop"
+  install -Dm644 assets/global-network-map.svg "${pkgdir}/usr/share/icons/hicolor/scalable/apps/global-network-map.svg"
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  install -Dm644 ATTRIBUTION.md "${pkgdir}/usr/share/licenses/${pkgname}/ATTRIBUTION.md"
+  install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
+}
